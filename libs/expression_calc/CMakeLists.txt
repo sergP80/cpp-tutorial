@@ -2,7 +2,7 @@
 
 include_directories(include)
 
-file(GLOB SRC "src/*.cpp" "src/*.cxx")
+file(GLOB SRC src/*.cpp src/*.cxx)
 
 add_library(${PROJECT_NAME} ${SRC})
 

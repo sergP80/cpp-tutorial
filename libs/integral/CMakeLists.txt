@@ -1,6 +1,6 @@
 ﻿project("integral")
 
-file(GLOB_RECURSE SRC LIST_DIRECTORIES true *.cpp *.cxx)
+file(GLOB SRC src/*.cpp src/*.cxx)
 
 include_directories(include)
 

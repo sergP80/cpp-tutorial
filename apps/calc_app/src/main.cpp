@@ -1,49 +1,35 @@
-﻿// integral.cpp : Defines the entry point for the application.
-//
+﻿#include "app.hpp"
 
-#include "integral_app.h"
+using std::cout;
+using std::cin;
+using std::endl;
+using std::setprecision;
+using std::fixed;
+using std::setw;
 
-using namespace std;
+int main() {
+    using expression_calc::ExpressionCalculator;
 
-double f1(const double& x)
-{
-	return x * x - 2;
-}
+    cout << "Enter expression constant a, b:";
 
-double f2(const double& x)
-{
-	return log(x + 2)*sqrt(x+3);
-}
+    double a, b;
+    cin >> a >> b;
 
+    ExpressionCalculator calculator{a, b};
 
-int main()
-{
-	math::integral::LeftRect lr(-1, 2, 50);
-	math::integral::CentralRect cr(-1, 2, 50);
+    cout << "Enter range of calculation [from, to, step]:";
 
-	{
-		cout << "F1" << endl;
+    double from, to, step;
 
-		auto r = lr.compute(f1);
+    cin >> from >> to >> step;
 
-		cout << "Left rec:" << r << endl;
+    cout << setw(10) << "x";
+    cout << setw(10) << "result" << endl;
 
-		r = cr.compute(f1);
+    for (auto x = from; x <= to; x += step) {
+        auto result = calculator(x);
 
-		cout << "Central rec:" << r << endl;
-
-	}
-
-	{
-		cout << "\nF2" << endl;
-
-		auto r = lr(f2);
-
-		cout << "Left rec:" << r << endl;
-
-		r = cr(f2);
-
-		cout << "Central rec:" << r << endl;
-	}
-	
+        cout << setw(10) << setprecision(5) << fixed << x;
+        cout << setw(10) <<setprecision(5) << fixed << result << endl;
+    }
 }

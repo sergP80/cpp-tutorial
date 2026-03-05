@@ -366,3 +366,4 @@ cmake-*
 .idea
 .vs
 build
+dist

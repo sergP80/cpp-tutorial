@@ -1,15 +1,11 @@
 ﻿#pragma once
 
-#include <iostream>
-
 namespace math::integral {
-	//double f1(const double& x)
-	
-	typedef double (*IntegralFunc)(const double& x);
+
+	typedef double (*integral_func_t)(const double& x);
 
 
 	class LeftRect {
-	private:
 		double a;
 		
 		double b;
@@ -18,28 +14,20 @@ namespace math::integral {
 
 		double h;
 	public:
-		LeftRect(const double& a, const double& b, const int& n_points)
+		LeftRect(const double& a_, const double& b_, const int& n_points_): a(a_), b(b_), n_points(n_points_)
 		{
-			this->a = a;
-
-			this->b = b;
-			
-			this->n_points = n_points;
-
 			this->h = (b - a) / (n_points - 1);
 		}
 
-		const double compute(IntegralFunc func) const;
-		
-		const double operator()(IntegralFunc func) const
-		{
-			return compute(func);
+		double compute(integral_func_t func) const;
+
+		double operator()(integral_func_t f) const {
+			return compute(f);
 		}
 
 	};
 
 	class CentralRect {
-	private:
 		double a;
 
 		double b;
@@ -48,22 +36,15 @@ namespace math::integral {
 
 		double h;
 	public:
-		CentralRect(const double& a, const double& b, const int& n_points)
+		CentralRect(const double& a_, const double& b_, const int& n_points_): a(a_), b(b_), n_points(n_points_)
 		{
-			this->a = a;
-
-			this->b = b;
-
-			this->n_points = n_points;
-
 			this->h = (b - a) / (n_points - 1);
 		}
 
-		const double compute(IntegralFunc func) const;
+		double compute(integral_func_t func) const;
 
-		const double operator()(IntegralFunc func) const
-		{
-			return compute(func);
+		double operator()(integral_func_t f) const {
+			return compute(f);
 		}
 
 	};

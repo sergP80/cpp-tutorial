@@ -1,7 +1,6 @@
-﻿#include "integral.h"
+﻿#include "integral.hpp"
 
-const double math::integral::LeftRect::compute(IntegralFunc func) const
-{
+double math::integral::LeftRect::compute(integral_func_t func) const {
 	auto S = 0.0;
 
 	for (auto x = a; x < b; x += h)
@@ -12,8 +11,7 @@ const double math::integral::LeftRect::compute(IntegralFunc func) const
 	return S * h;
 }
 
-const double math::integral::CentralRect::compute(IntegralFunc func) const
-{
+double math::integral::CentralRect::compute(integral_func_t func) const {
 	auto S = 0.0;
 
 	for (auto x = a; x < b; x += h)
