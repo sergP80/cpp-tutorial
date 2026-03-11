@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <iomanip>
-#include <cmath>
 #include <string>
 
 struct Employee {
@@ -11,20 +10,20 @@ struct Employee {
 	std::string name;
 };
 
-bool operator<(const Employee e1, const Employee e2)
+inline bool operator<(const Employee& e1, const Employee& e2)
 {
 	//return e1.salary < e2.salary;
 	return e1.name.size() < e2.name.size();
 }
 
-bool operator>(const Employee e1, const Employee e2)
+inline bool operator>(const Employee& e1, const Employee& e2)
 {
 	//return e1.salary > e2.salary;
 	return e1.name.size() > e2.name.size();
 }
 
 
-std::ostream& operator<<(std::ostream& os, const Employee& e)
+inline std::ostream& operator<<(std::ostream& os, const Employee& e)
 {
 	os << "Employee {";
 	os << "id: " << e.id;

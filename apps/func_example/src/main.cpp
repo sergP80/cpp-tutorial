@@ -29,7 +29,6 @@ int main() {
     }
 
     {
-
         Employee employees[] = {
             {1, 12901.87, "John Doe"},
             {2, 47791.68, "Sam Altman"},
