@@ -3,6 +3,9 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <algorithm>
+#include <array>
+#include <functional>
 
 struct Employee {
 	int id;
@@ -134,4 +137,10 @@ void min_max(T (&a)[sz], T& min, T& max)
 			max = a[i];
 		}
 	}
+}
+
+
+double expr_calc(const double& a, const double& b, std::function<double(double, double)> f)
+{
+	return f(a, b);
 }
