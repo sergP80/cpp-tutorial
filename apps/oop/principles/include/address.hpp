@@ -6,6 +6,8 @@
 
 namespace client_bank
 {
+    class AddressBuilder;
+
     class Address
     {
         std::string country_code;
@@ -96,11 +98,68 @@ namespace client_bank
         }
 
         [[nodiscard]] std::string to_string() const;
+
+        friend class AddressBuilder;
     };
 
     inline std::ostream& operator<<(std::ostream& os, const Address& address)
     {
         os << address.to_string();
         return os;
+    }
+
+    namespace builder
+    {
+        class AddressBuilder
+        {
+            Address result;
+            AddressBuilder() = default;
+        public:
+            static AddressBuilder builder()
+            {
+                return {};
+            }
+
+            AddressBuilder& country_code(const std::string& country_code)
+            {
+                this->result.set_country_code(country_code);
+                return *this;
+            }
+
+            AddressBuilder& region(const std::string& region)
+            {
+                this->result.set_region(region);
+                return *this;
+            }
+
+            AddressBuilder& city(const std::string& city)
+            {
+                this->result.set_city(city);
+                return *this;
+            }
+
+            AddressBuilder& street(const std::string& street)
+            {
+                this->result.set_street(street);
+                return *this;
+            }
+
+            AddressBuilder& build_number(const std::string& build_number)
+            {
+                this->result.set_build_number(build_number);
+                return *this;
+            }
+
+            AddressBuilder& zip(const std::string& zip)
+            {
+                this->result.set_zip(zip);
+                return *this;
+            }
+
+            Address build()
+            {
+                return result;
+            }
+        };
     }
 }

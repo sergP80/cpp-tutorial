@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include <iostream>
-#include <iomanip>
 #include <string>
 #include "bank.hpp"
 #include "address.hpp"
@@ -24,7 +23,26 @@ namespace client_bank
 		{
 		}
 
-	private:
+		[[nodiscard]] int get_id() const
+		{
+			return id;
+		}
+
+		[[nodiscard]] Address get_address() const
+		{
+			return address;
+		}
+
+		void set_address(const Address& address)
+		{
+			this->address = address;
+		}
+
+		[[nodiscard]] Bank get_bank() const
+		{
+			return bank;
+		}
+
 		friend std::ostream& operator<<(std::ostream& os, const BankOffice& bo);
 	};
 

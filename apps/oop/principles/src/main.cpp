@@ -19,7 +19,18 @@ int main() {
     
     Address address1 {"UA", "Mykolayivska oblast", "Mykolayiv", "Shoseyna (Frunze)", "20/a", "54112"};
 
+    using client_bank::builder::AddressBuilder;
+
+    auto address2 = AddressBuilder::builder()
+    .country_code("UA")
+    .city("Mykolayiv")
+    .zip("54116")
+    .street("Budivelnikiv")
+    .build_number("14")
+    .build();
+
     cout << address1 << endl;
+    cout << address2 << endl;
 
     return 0;
 }
