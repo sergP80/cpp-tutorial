@@ -1,4 +1,4 @@
-﻿project("principles")
+﻿project("smart_ptr")
 
 file(GLOB SRC src/*.cpp src/*.cxx)
 

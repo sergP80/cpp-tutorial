@@ -1,9 +1,4 @@
-﻿#include <iostream>
-#include <iomanip>
-#include "address.hpp"
-#include "bank.hpp"
-#include "bank_office.hpp"
-#include "personal.hpp"
+﻿#include "app.hpp"
 
 using std::cout;
 using std::cin;
@@ -17,8 +12,8 @@ using client_bank::BankOffice;
 using client_bank::Address;
 using client_bank::builder::PersonalBuilder;
 
-int main() {
-    
+int main()
+{
     Address address1 {"UA", "Mykolayivska oblast", "Mykolayiv", "Shoseyna (Frunze)", "20/a", "54112"};
 
     using client_bank::builder::PersonalBuilder;
@@ -42,5 +37,17 @@ int main() {
     cout << personal << endl;
     cout << address1 << endl;
     cout << address2 << endl;
+
+    {
+        Address address = "54,V.Morska str.,Mykolayiv,UA,54210";
+        cout << address << endl;
+    }
+
+    {
+        Address address = std::string("68,Desantnikov str.,Mykolayiv,UA,54030");
+        cout << address << endl;
+    }
+
+
     return 0;
 }

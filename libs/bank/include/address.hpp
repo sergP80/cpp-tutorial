@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 #include "country_validator.hpp"
 
 namespace client_bank
@@ -32,6 +33,33 @@ namespace client_bank
               street(street),
               buildNumber(build_number),
               zip(zip)
+        {
+        }
+
+        [[nodiscard]] Address(const std::string& country_code,
+                              const std::string& city,
+                              const std::string& street,
+                              const std::string& zip)
+            : country_code(country_code),
+              region(""),
+              city(city),
+              street(street),
+              buildNumber(""),
+              zip(zip)
+        {
+        }
+
+        [[nodiscard]] Address(const std::string& address)
+        {
+            std::stringstream ss(address);
+            std::getline(ss, this->buildNumber, ',');
+            std::getline(ss, this->street, ',');
+            std::getline(ss, this->city, ',');
+            std::getline(ss, this->country_code, ',');
+            std::getline(ss, this->zip, ',');
+        }
+
+        [[nodiscard]] Address(const char* address) : Address(std::string(address))
         {
         }
 
