@@ -27,9 +27,16 @@ int main() {
     cout << setw(10) << "result" << endl;
 
     for (auto x = from; x <= to; x += step) {
-        auto result = calculator(x);
+        try
+        {
+            auto result = calculator(x);
 
-        cout << setw(10) << setprecision(5) << fixed << x;
-        cout << setw(10) <<setprecision(5) << fixed << result << endl;
+            cout << setw(10) << setprecision(5) << fixed << x;
+            cout << setw(10) <<setprecision(5) << fixed << result << endl;
+        } catch (std::exception& e)
+        {
+            cout << "Error:" << e.what() << endl;
+        }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿#include "app.hpp"
+#include "bank_group.hpp"
 
 using std::cout;
 using std::cin;
@@ -11,6 +12,8 @@ using client_bank::Bank;
 using client_bank::BankOffice;
 using client_bank::Address;
 using client_bank::builder::PersonalBuilder;
+
+using client_bank::BankGroup;
 
 int main()
 {
@@ -48,6 +51,12 @@ int main()
         cout << address << endl;
     }
 
+    BankGroup bank_group = BankGroup::create("A1");
+    cout << bank_group << endl;
 
+    BankGroup bank_group2 = BankGroup::create("A2");
+
+    cout << bank_group << endl;
+    cout << BankGroup::get_instance_count() << endl;
     return 0;
 }
