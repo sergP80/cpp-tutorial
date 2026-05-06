@@ -72,5 +72,9 @@ int main() {
         SharedPtr<int> p_count = smart_ptr::make_shared<int>(25);
     }
 
+    {
+        std::list<int> list1;
+    }
+
     return 0;
 }
