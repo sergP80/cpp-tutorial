@@ -5,9 +5,9 @@
 
 namespace smart_ptr {
 
-	struct xEmptyResource {};
+	struct xEmptyResource: std::exception{};
 
-	struct xIndexOutOfBound {};
+	struct xIndexOutOfBound: std::exception {};
 	
 	template<typename T>
 	class UniquePtr {
@@ -16,7 +16,7 @@ namespace smart_ptr {
 		UniquePtr()
 			: data(nullptr) {}
 
-		UniquePtr(T* src)
+		explicit UniquePtr(T* src)
 			: data(src) {}
 
 		UniquePtr(const UniquePtr&) = delete;
@@ -75,7 +75,7 @@ namespace smart_ptr {
 			, size(0)
 		{}
 
-		UniquePtr(int sz) 
+		explicit  UniquePtr(int sz)
 			: data(new T[sz])
 			, size(sz)
 		{}
@@ -158,6 +158,24 @@ namespace smart_ptr {
 		
 		UniquePtr(int* src) : data(src) {}
 
+		UniquePtr(const UniquePtr&) = delete;
+
+		UniquePtr& operator=(const UniquePtr&) = delete;
+
+		UniquePtr(UniquePtr&& other)
+			:data(other.data)
+		{
+			other.data = nullptr;
+		}
+
+		UniquePtr& operator=(UniquePtr&& other)
+		{
+			data = other.data;
+			other.data = nullptr;
+
+			return *this;
+		}
+
 		~UniquePtr() {
 			if (data) {
 				delete data;
@@ -183,14 +201,12 @@ namespace smart_ptr {
 
 	template<>
 	class UniquePtr<bool[]> {
-	private:
 		unsigned char* data;
 		std::size_t size;      // number of bool values
 		std::size_t bytes;     // number of allocated bytes
 
 	public:
 		class BoolReference {
-		private:
 			unsigned char& byte;
 			unsigned char mask;
 
@@ -316,11 +332,10 @@ namespace smart_ptr {
 
 	template<typename T>
 	class SharedPtr {
-	private:
 		T* data;
 		std::size_t* counter;
 
-		void releaseCurrent() {
+		void release_counter() {
 			if (counter == nullptr) {
 				return;
 			}
@@ -367,7 +382,7 @@ namespace smart_ptr {
 				return *this;
 			}
 
-			releaseCurrent();
+			release_counter();
 
 			data = other.data;
 			counter = other.counter;
@@ -385,7 +400,7 @@ namespace smart_ptr {
 				return *this;
 			}
 
-			releaseCurrent();
+			release_counter();
 
 			data = other.data;
 			counter = other.counter;
@@ -397,7 +412,7 @@ namespace smart_ptr {
 		}
 
 		~SharedPtr() {
-			releaseCurrent();
+			release_counter();
 		}
 
 		T& operator*() const {

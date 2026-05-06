@@ -12,10 +12,8 @@ using client_bank::BankOffice;
 using client_bank::Address;
 using client_bank::builder::PersonalBuilder;
 
-
-
 int main() {
-    
+
     /*Address * r1 = new Address();
 
     Address * r2 = r1;
@@ -23,7 +21,8 @@ int main() {
     r1 = nullptr;*/
 
     {
-        std::shared_ptr<Address> p_addr_1 = std::make_shared<Address>("UA", "Mykolayivska oblast", "Mykolayiv", "Shoseyna (Frunze)", "20/a", "54112");
+        std::shared_ptr<Address> p_addr_1 = std::make_shared<Address>("UA", "Mykolayivska oblast", "Mykolayiv",
+                                                                      "Shoseyna (Frunze)", "20/a", "54112");
 
         cout << p_addr_1.use_count() << endl;
 
@@ -40,7 +39,8 @@ int main() {
     }
 
     {
-        std::unique_ptr<Address> p_addr_1 = std::make_unique<Address>("UA", "Mykolayivska oblast", "Mykolayiv", "Shoseyna (Frunze)", "20/a", "54112");
+        std::unique_ptr<Address> p_addr_1 = std::make_unique<Address>("UA", "Mykolayivska oblast", "Mykolayiv",
+                                                                      "Shoseyna (Frunze)", "20/a", "54112");
         std::unique_ptr<Address> p_addr_2 = std::move(p_addr_1);
 
         cout << *p_addr_2 << endl;
@@ -53,15 +53,15 @@ int main() {
 
         cout << *ptr1 << endl;
 
+        UniquePtr<int> ptr2 = std::move(ptr1);
+
         UniquePtr<int[]> array = smart_ptr::make_unique_array<int>(10);
 
-        for (std::size_t i = 0; i < array.length(); ++i)
-        {
+        for (std::size_t i = 0; i < array.length(); ++i) {
             array[i] = i + 1;
         }
 
-        for (std::size_t i = 0; i < array.length(); ++i)
-        {
+        for (std::size_t i = 0; i < array.length(); ++i) {
             cout << array[i] << endl;
         }
     }
