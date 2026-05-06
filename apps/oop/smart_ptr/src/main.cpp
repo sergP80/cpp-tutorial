@@ -55,12 +55,12 @@ int main() {
 
         UniquePtr<int[]> array = smart_ptr::make_unique_array<int>(10);
 
-        for (int i = 0; i < array.length(); ++i)
+        for (std::size_t i = 0; i < array.length(); ++i)
         {
             array[i] = i + 1;
         }
 
-        for (int i = 0; i < array.length(); ++i)
+        for (std::size_t i = 0; i < array.length(); ++i)
         {
             cout << array[i] << endl;
         }

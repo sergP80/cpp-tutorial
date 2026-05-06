@@ -47,8 +47,6 @@ int main() {
     {
         int origin = -3;
 
-        double g = 1.15;
-
         auto sum1 = [&](const int& a, const int& b)
         {
             return origin + a + b;
@@ -92,9 +90,14 @@ int main() {
                 return origin + a + b;
             };
 
-        auto res_d1 = expr_calc(3.5, 5, [origin](const double& a, const double& b) {return origin + a + b; });
+        auto res_d1 = expr_calc(3.5, 5, summator);
 
         cout << "Summator: " << res_d1 << endl;
+
+        auto res_d2 = expr_calc(3.5, 5, [origin](const double& a, const double& b) {return origin + a + b; });
+
+        cout << "Summator: " << res_d2 << endl;
+
     }
 
     return 0;

@@ -24,16 +24,16 @@ namespace smart_ptr {
 		UniquePtr& operator=(const UniquePtr&) = delete;
 
 		UniquePtr(UniquePtr&& other) noexcept
-			: ptr(other.ptr) {
-			other.ptr = nullptr;
+			: data(other.data) {
+			other.data = nullptr;
 		}
 
 		UniquePtr& operator=(UniquePtr&& other) noexcept {
 			if (this != &other) {
-				delete ptr;
+				delete data;
 
-				ptr = other.ptr;
-				other.ptr = nullptr;
+				data = other.data;
+				other.data = nullptr;
 			}
 
 			return *this;
@@ -132,7 +132,7 @@ namespace smart_ptr {
 				throw xEmptyResource();
 			}
 
-			if (idex < 0 || index >= size)
+			if (index < 0 || index >= size)
 			{
 				throw xIndexOutOfBound();
 			}
@@ -354,7 +354,7 @@ namespace smart_ptr {
 		}
 
 		SharedPtr(SharedPtr&& other) noexcept
-			: data(other.ptr)
+			: data(other.data)
 			, counter(other.counter) {
 
 			other.data = nullptr;
@@ -414,7 +414,7 @@ namespace smart_ptr {
 		}
 
 		explicit operator bool() const {
-			return ptr != nullptr;
+			return data != nullptr;
 		}
 	};
 
