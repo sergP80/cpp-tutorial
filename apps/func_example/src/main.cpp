@@ -7,6 +7,7 @@ using std::setprecision;
 using std::fixed;
 using std::setw;
 
+
 int main() {
     
     int a1[] = { 1, -3, 5, 8, -4 };

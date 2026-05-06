@@ -1,7 +1,5 @@
 ﻿#include "app.hpp"
 
-#include <memory>
-
 using std::cout;
 using std::cin;
 using std::endl;
@@ -13,6 +11,8 @@ using client_bank::Bank;
 using client_bank::BankOffice;
 using client_bank::Address;
 using client_bank::builder::PersonalBuilder;
+
+
 
 int main() {
     
@@ -44,6 +44,32 @@ int main() {
         std::unique_ptr<Address> p_addr_2 = std::move(p_addr_1);
 
         cout << *p_addr_2 << endl;
+    }
+
+    {
+        using smart_ptr::UniquePtr;
+
+        UniquePtr<int> ptr1 = smart_ptr::make_unique<int>(210);
+
+        cout << *ptr1 << endl;
+
+        UniquePtr<int[]> array = smart_ptr::make_unique_array<int>(10);
+
+        for (int i = 0; i < array.length(); ++i)
+        {
+            array[i] = i + 1;
+        }
+
+        for (int i = 0; i < array.length(); ++i)
+        {
+            cout << array[i] << endl;
+        }
+    }
+
+    {
+        using smart_ptr::SharedPtr;
+
+        SharedPtr<int> p_count = smart_ptr::make_shared<int>(25);
     }
 
     return 0;
